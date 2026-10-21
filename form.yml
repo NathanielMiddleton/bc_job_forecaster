@@ -1,0 +1,33 @@
+---
+# Batch Connect form for Job Forecaster.
+# `cluster` MUST match a file in /etc/ood/config/clusters.d/ (e.g. "hpc" for hpc.yml).
+cluster: "CHANGE_ME"
+
+form:
+  - bc_account
+  - bc_queue
+  - bc_num_hours
+  - python_module
+  - refresh_seconds
+
+attributes:
+  bc_queue:
+    label: "Partition"
+    help: "Any partition that can start a 1-core, 1 GB, short job quickly. Leave blank for the default."
+  bc_num_hours:
+    label: "Hours to keep the page available"
+    value: 4
+    min: 1
+    max: 24
+  python_module:
+    widget: text_field
+    label: "Python module to load (optional)"
+    help: "e.g. python/3.11. Leave blank to use the system python3 (must be >= 3.7, standard library only)."
+    value: ""
+  refresh_seconds:
+    widget: number_field
+    label: "Seconds between re-reads of scontrol"
+    help: "Lower is fresher; higher is kinder to the controller."
+    value: 30
+    min: 10
+    max: 600
