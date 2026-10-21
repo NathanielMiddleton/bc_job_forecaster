@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Starts the Job Forecaster server. Must stay in the foreground: when it exits, the session ends.
+set -u
+cd "${PWD}"
+
+<%- unless context.python_module.to_s.strip.empty? -%>
+module purge
+module load <%= context.python_module.to_s.strip %>
+<%- end -%>
+
+export JOB_FORECASTER_TTL="<%= context.refresh_seconds.to_i.clamp(10, 600) %>"
+# If scontrol is not on PATH on compute nodes, set it here:
+# export JOB_FORECASTER_SCONTROL=/usr/bin/scontrol
+
+echo "python: $(command -v python3)  ($(python3 --version 2>&1))"
+echo "scontrol: $(command -v scontrol || echo 'not on PATH - set JOB_FORECASTER_SCONTROL in script.sh.erb')"
+echo "TIMING - Starting Job Forecaster at: $(date)"
+
+# `lib/` is staged with this session (it lives in the app's template/ directory).
+exec python3 "${PWD}/lib/fit_tool.py" --web --host 0.0.0.0 --port "${port}"

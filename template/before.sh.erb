@@ -1,0 +1,9 @@
+# Runs on the compute node before script.sh, inside the Batch Connect "basic" template.
+# `host` is already set by the template; we pick a free port on it.
+
+# Keep the `module` function available to child shells (if the site uses environment modules).
+[[ $(type -t module) == "function" ]] && export -f module
+
+port=$(find_port "${host}")
+export port
+echo "Job Forecaster will listen on ${host}:${port}"

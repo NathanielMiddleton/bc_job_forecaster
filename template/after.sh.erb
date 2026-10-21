@@ -1,0 +1,10 @@
+# Wait until the server is accepting connections before OnDemand shows the Connect button.
+echo "Waiting for Job Forecaster to open port ${port}..."
+if wait_until_port_used "${host}:${port}" 90; then
+  echo "Job Forecaster is listening on ${host}:${port}"
+else
+  echo "Timed out waiting for Job Forecaster; see output.log"
+  pkill -P ${SCRIPT_PID}
+  clean_up 1
+fi
+sleep 2
