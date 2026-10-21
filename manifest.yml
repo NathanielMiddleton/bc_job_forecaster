@@ -1,0 +1,10 @@
+---
+name: Job Forecaster
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: |
+  See what is free on the cluster, what is pending and when it will start, and tune
+  a job's CPU/memory/GPU/walltime request until it fits sooner. Runs a tiny
+  single-core job that serves the page; nothing else is consumed.
+icon: fa://clock
