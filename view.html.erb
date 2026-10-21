@@ -1,0 +1,10 @@
+<%# Shown on "My Interactive Sessions" once the job is running.
+    Only connection parameters (host, port) are available here, not the form values. %>
+<form action="/node/<%= host %>/<%= port %>/" method="get" target="_blank">
+  <button class="btn btn-primary" type="submit">
+    <i class="fa fa-clock" aria-hidden="true"></i> Open Job Forecaster
+  </button>
+</form>
+<p class="small text-muted" style="margin-top:.5rem">
+  Serving from <code><%= host %>:<%= port %></code>. The page reads Slurm as you.
+</p>
