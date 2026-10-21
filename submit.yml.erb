@@ -1,0 +1,12 @@
+---
+# The job only has to run one single-threaded Python process that serves the page.
+batch_connect:
+  template: "basic"
+script:
+  native:
+    - "--nodes=1"
+    - "--ntasks=1"
+    - "--cpus-per-task=1"
+    - "--mem=1G"
+  # job_name defaults to the app name; uncomment to force a partition instead of asking in the form:
+  # queue_name: "interactive"
